@@ -2,9 +2,14 @@ package com.hibernatetutorial.part02.anotations.attributeoverrides;
 
 import java.io.Serializable;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import com.hibernatetutorial.part02.anotations.embeddable.Address;
 
 @Entity
 public class Employee implements Serializable {
@@ -17,6 +22,15 @@ public class Employee implements Serializable {
 	private int id;
 	private String name;
 	private String surname;
+
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "region", column = @Column(name = "address_region")),
+		@AttributeOverride(name = "region", column = @Column(name = "homeAddress_region")),
+		@AttributeOverride(name = "city", column = @Column(name = "homeAddress_city")),
+		@AttributeOverride(name = "district", column = @Column(name = "homeAddress_district")),
+		@AttributeOverride(name = "street", column = @Column(name = "homeAddress_street")),
+	})
+	private Address homeAddress;
 
 	@Embedded
 	private Address address;
@@ -63,10 +77,10 @@ public class Employee implements Serializable {
 	}
 
 	public void setAddress(Address address) {
-		this.address = address;
+		this.homeAddress = address;
 	}
 
 	public Address getAddress() {
-		return address;
+		return homeAddress;
 	}
 }
