@@ -24,7 +24,8 @@ public class Employee implements Serializable {
 	private String surname;
 
 	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "region", column = @Column(name = "address_region")),
+	@AttributeOverrides({ 
+		@AttributeOverride(name = "region", column = @Column(name = "homeAddress_region")),
 		@AttributeOverride(name = "region", column = @Column(name = "homeAddress_region")),
 		@AttributeOverride(name = "city", column = @Column(name = "homeAddress_city")),
 		@AttributeOverride(name = "district", column = @Column(name = "homeAddress_district")),
